@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TARGET="T1019s2"
-TARGET_FILE="test_data/${TARGET}.pkl"
+TARGET="T0949"
+TARGET_FILE="test_data/${TARGET}.tfrec"
 MODEL_DIR="model"
 OUTPUT_DIR="${TARGET}_out"
 
@@ -13,6 +13,7 @@ for replica in 0 1 2 3; do
 		echo "Launching model: ${m} ${replica}"
 		python alphafold.py -i $TARGET_FILE -o $OUTPUT_DIR -m $MODEL_DIR -r $replica -t $m | cat &
 	done
+	wait
 done
 
 echo -e "All models running, waiting for them to complete\n"
